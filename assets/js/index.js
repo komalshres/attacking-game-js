@@ -24,35 +24,43 @@ const attackHandler = () => {
     .getElementById("player_health")
     .setAttribute("value", `${player_health}`);
 
-  let test = player_health >= 0 ? player_health : 0;
-  document.querySelector("span").textContent = test;
+  let player_0_health = player_health >= 0 ? player_health : 0;
+  document.querySelector("#player-damage").innerHTML = `${player_0_health} HP`;
+
   document
     .getElementById("robot_health")
     .setAttribute("value", `${robot_health}`);
 
+  let robot_0_health = robot_health >= 0 ? robot_health : 0;
+  document.querySelector("#robot-damage").innerHTML = `${robot_0_health} HP`;
+
   console.log(player_health);
   console.log(robot_health);
+
+  const x = document.getElementById("test");
+  const y = document.createElement("p");
+  y.innerHTML = `<p>>> Player delt ${robot_damage} damage to robot <<</p><p> >> Robot delt ${player_damage} damage to player <<</p>`;
+  x.prepend(y);
 
   if (player_health <= 0 && robot_health <= 0) {
     document.getElementById("playerLost").innerHTML = "Its a draw";
     document.getElementById("attack").classList.add("display-none");
     document.getElementById("attack").classList.remove("display-block");
     document.getElementById("restart").classList.remove("display-none");
-    document.getElementById("stop").classList.add("display-block");
+    document.getElementById("restart").classList.add("display-block");
   } else if (player_health <= 0) {
     document.getElementById("playerLost").innerHTML =
       "Sorry, You lost. Robot is the winner";
     document.getElementById("attack").classList.add("display-none");
     document.getElementById("attack").classList.remove("display-block");
-
     document.getElementById("restart").classList.remove("display-none");
-
-    document.getElementById("stop").classList.add("display-block");
+    document.getElementById("restart").classList.add("display-block");
   } else if (robot_health <= 0) {
     document.getElementById("playerLost").innerHTML =
       "You are the winner!!! Congrats";
     document.getElementById("attack").classList.add("display-none");
     document.getElementById("attack").classList.remove("display-block");
+    document.getElementById("restart").classList.remove("display-none");
 
     document.getElementById("restart").classList.add("display-block");
   }
@@ -71,4 +79,6 @@ const restartHandler = () => {
   document
     .getElementById("robot_health")
     .setAttribute("value", `${robot_health}`);
+  document.getElementById("playerLost").innerHTML = "";
+  document.getElementById("test").innerHTML = "";
 };

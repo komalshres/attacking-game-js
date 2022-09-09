@@ -12,7 +12,10 @@
       <div class="container">
         <section class="health-bar">
           <div>
-            <p id="player_name">Player<span>500</span>hp</p>
+            <div id="player_name">
+              <p>Player</p>
+              <p id="player-damage">500<span> HP</span></p>
+            </div>
             <progress
               id="player_health"
               class="player-health-bar"
@@ -23,7 +26,10 @@
             </progress>
           </div>
           <div>
-            <p>Robot</p>
+            <div id="player_name">
+              <p>Player</p>
+              <p id="robot-damage">500<span> HP</span></p>
+            </div>
             <progress
               id="robot_health"
               class="player-health-bar"
@@ -47,7 +53,7 @@
             Restart
           </button>
         </section>
-        <section class="attack-stats"></section>
+        <section id="test" class="attack-stats"></section>
       </div>
     </main>
     <script src="/assets/js/index.js"></script>
