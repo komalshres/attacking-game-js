@@ -4,6 +4,10 @@ const healthBar = {
   robotHealth: 500,
 };
 
+// Set player name
+const player = prompt("Enter your name");
+document.getElementById("player-name").textContent = `${player}`;
+
 // Initializing player and robot health
 let playerHealth = healthBar.playerHealth;
 let robotHealth = healthBar.robotHealth;
@@ -61,7 +65,13 @@ const attackHandler = () => {
   // Displays damage dealt by player and robot in dialogue
   const attackStatusBoxElement = document.getElementById("attack-stats-box");
   const newNodeInAttackStatusBox = document.createElement("p");
-  newNodeInAttackStatusBox.innerHTML = `<p>>> Player delt ${robotDamage} damage to robot <<</p><p> >> Robot delt ${playerDamage} damage to player <<</p>`;
+  if (robotDamage >= 90) {
+    newNodeInAttackStatusBox.innerHTML = `<p>>> Critical damage of ${robotDamage} to robot by ${player} <<</p><p> >> Robot delt ${playerDamage} damage to ${player} <<</p>`;
+  } else if (playerDamage >= 90) {
+    newNodeInAttackStatusBox.innerHTML = `<p>>> ${player} delt ${robotDamage} damage to robot <<</p><p> >> Robot delt critical damage of ${playerDamage} to ${player} <<</p>`;
+  } else {
+    newNodeInAttackStatusBox.innerHTML = `<p>>> ${player} delt ${robotDamage} damage to robot <<</p><p> >> Robot delt ${playerDamage} damage to ${player} <<</p>`;
+  }
   attackStatusBoxElement.prepend(newNodeInAttackStatusBox);
 
   // Condition for who won the game
