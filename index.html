@@ -10,15 +10,16 @@
   <body>
     <main>
       <div class="container">
-        <section class="health-bar">
+        <h1>simple attacking game in js</h1>
+        <section class="health-bar-container">
           <div>
-            <div id="player_name">
+            <div>
               <p>Player</p>
-              <p id="player-damage">500<span> HP</span></p>
+              <p id="player-damage">500<span> / 500 HP</span></p>
             </div>
             <progress
-              id="player_health"
-              class="player-health-bar"
+              id="player-health"
+              class="health-bar"
               value="500"
               max="500"
             >
@@ -26,13 +27,13 @@
             </progress>
           </div>
           <div>
-            <div id="player_name">
-              <p>Player</p>
-              <p id="robot-damage">500<span> HP</span></p>
+            <div>
+              <p>Robot</p>
+              <p id="robot-damage">500<span> / 500 HP</span></p>
             </div>
             <progress
-              id="robot_health"
-              class="player-health-bar"
+              id="robot-health"
+              class="health-bar"
               value="500"
               max="500"
             >
@@ -40,12 +41,9 @@
             </progress>
           </div>
         </section>
-        <p id="playerLost"></p>
+        <p id="game-message"></p>
         <section class="button-container">
-          <p id="playerLost"></p>
-          <button id="start" onclick="startHandler()" class="display-block">
-            Start
-          </button>
+          <button id="start" onclick="startHandler()">Start</button>
           <button id="attack" onclick="attackHandler()" class="display-none">
             Attack
           </button>
@@ -53,7 +51,7 @@
             Restart
           </button>
         </section>
-        <section id="test" class="attack-stats"></section>
+        <section id="attack-stats-box" class="attack-stats"></section>
       </div>
     </main>
     <script src="/assets/js/index.js"></script>

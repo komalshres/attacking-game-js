@@ -1,84 +1,115 @@
+// Player and robot initial health
 const healthBar = {
-  player_health: 500,
-  robot_health: 500,
+  playerHealth: 500,
+  robotHealth: 500,
 };
+
+// Initializing player and robot health
+let playerHealth = healthBar.playerHealth;
+let robotHealth = healthBar.robotHealth;
+
+// getting Element of all three button
+const startButton = document.getElementById("start");
+const attackButton = document.getElementById("attack");
+const restartButton = document.getElementById("restart");
+
+// function to add and remove button
+const add = (button) => button.classList.remove("display-none");
+const remove = (button) => button.classList.add("display-none");
+
+// Handle onclick even in start button
 const startHandler = () => {
-  console.log("hello");
-  document.getElementById("attack").classList.remove("display-none");
-  document.getElementById("attack").classList.add("display-block");
-  document.getElementById("start").classList.remove("display-block");
-  document.getElementById("start").classList.add("display-none");
+  //Hides start button and shows attack button
+  add(attackButton);
+  remove(startButton);
+  // Display message on how to attack
+  document.getElementById("game-message").innerHTML =
+    "The game has started, click on attack. The robot will attack automatically.";
 };
 
-let player_health = healthBar.player_health;
-let robot_health = healthBar.robot_health;
-
+// Handles onClick event on attack button
 const attackHandler = () => {
-  const player_damage = Math.floor(Math.random() * 100);
-  const robot_damage = Math.floor(Math.random() * 100);
+  // Removes message after attack is clicked
+  document.getElementById("game-message").innerHTML = "";
 
-  player_health = player_health - player_damage;
-  robot_health = robot_health - robot_damage;
+  // Generates random damage value from 0 - 100
+  const playerDamage = Math.floor(Math.random() * 100);
+  const robotDamage = Math.floor(Math.random() * 100);
+
+  // Calculates player and robots health after damage is delt
+  playerHealth = playerHealth - playerDamage;
+  robotHealth = robotHealth - robotDamage;
+
+  // Display health remaining of player and robot
+  document.querySelector("#player-damage").innerHTML = `${
+    playerHealth >= 0 ? playerHealth : 0 //doesn't allow health to be less than 0
+  } / 500 HP`;
+
+  document.querySelector("#robot-damage").innerHTML = `${
+    robotHealth >= 0 ? robotHealth : 0 //doesn't allow health to be less than 0
+  } / 500 HP`;
+
+  // Displays remaining health in healthbar
+  document
+    .getElementById("player-health")
+    .setAttribute("value", `${playerHealth}`);
 
   document
-    .getElementById("player_health")
-    .setAttribute("value", `${player_health}`);
+    .getElementById("robot-health")
+    .setAttribute("value", `${robotHealth}`);
 
-  let player_0_health = player_health >= 0 ? player_health : 0;
-  document.querySelector("#player-damage").innerHTML = `${player_0_health} HP`;
+  // Displays damage dealt by player and robot in dialogue
+  const attackStatusBoxElement = document.getElementById("attack-stats-box");
+  const newNodeInAttackStatusBox = document.createElement("p");
+  newNodeInAttackStatusBox.innerHTML = `<p>>> Player delt ${robotDamage} damage to robot <<</p><p> >> Robot delt ${playerDamage} damage to player <<</p>`;
+  attackStatusBoxElement.prepend(newNodeInAttackStatusBox);
 
-  document
-    .getElementById("robot_health")
-    .setAttribute("value", `${robot_health}`);
-
-  let robot_0_health = robot_health >= 0 ? robot_health : 0;
-  document.querySelector("#robot-damage").innerHTML = `${robot_0_health} HP`;
-
-  console.log(player_health);
-  console.log(robot_health);
-
-  const x = document.getElementById("test");
-  const y = document.createElement("p");
-  y.innerHTML = `<p>>> Player delt ${robot_damage} damage to robot <<</p><p> >> Robot delt ${player_damage} damage to player <<</p>`;
-  x.prepend(y);
-
-  if (player_health <= 0 && robot_health <= 0) {
-    document.getElementById("playerLost").innerHTML = "Its a draw";
-    document.getElementById("attack").classList.add("display-none");
-    document.getElementById("attack").classList.remove("display-block");
-    document.getElementById("restart").classList.remove("display-none");
-    document.getElementById("restart").classList.add("display-block");
-  } else if (player_health <= 0) {
-    document.getElementById("playerLost").innerHTML =
+  // Condition for who won the game
+  if (playerHealth <= 0 && robotHealth <= 0) {
+    document.getElementById("game-message").innerHTML = "Its a draw";
+    add(restartButton);
+    remove(attackButton);
+  } else if (playerHealth <= 0) {
+    document.getElementById("game-message").innerHTML =
       "Sorry, You lost. Robot is the winner";
-    document.getElementById("attack").classList.add("display-none");
-    document.getElementById("attack").classList.remove("display-block");
-    document.getElementById("restart").classList.remove("display-none");
-    document.getElementById("restart").classList.add("display-block");
-  } else if (robot_health <= 0) {
-    document.getElementById("playerLost").innerHTML =
+    add(restartButton);
+    remove(attackButton);
+  } else if (robotHealth <= 0) {
+    document.getElementById("game-message").innerHTML =
       "You are the winner!!! Congrats";
-    document.getElementById("attack").classList.add("display-none");
-    document.getElementById("attack").classList.remove("display-block");
-    document.getElementById("restart").classList.remove("display-none");
-
-    document.getElementById("restart").classList.add("display-block");
+    add(restartButton);
+    remove(attackButton);
   }
 };
 
+//Resets the game
 const restartHandler = () => {
-  player_health = healthBar.player_health;
-  robot_health = healthBar.robot_health;
-  document.getElementById("restart").classList.add("display-none");
-  document.getElementById("restart").classList.remove("display-block");
-  document.getElementById("attack").classList.remove("display-none");
-  document.getElementById("attack").classList.add("display-block");
+  // Resets player's and robot's healthbar and its value
+  playerHealth = healthBar.playerHealth;
+  robotHealth = healthBar.robotHealth;
+
+  document.querySelector(
+    "#player-damage"
+  ).innerHTML = `${playerHealth} / 500 HP`;
+
   document
-    .getElementById("player_health")
-    .setAttribute("value", `${player_health}`);
+    .getElementById("player-health")
+    .setAttribute("value", `${playerHealth}`);
+
+  document.querySelector("#robot-damage").innerHTML = `${robotHealth} / 500 HP`;
+
   document
-    .getElementById("robot_health")
-    .setAttribute("value", `${robot_health}`);
-  document.getElementById("playerLost").innerHTML = "";
-  document.getElementById("test").innerHTML = "";
+    .getElementById("robot-health")
+    .setAttribute("value", `${robotHealth}`);
+
+  // Restart button hides, Attack button shows
+  add(attackButton);
+  remove(restartButton);
+
+  // Game restarts message
+  document.getElementById("game-message").innerHTML =
+    "Game restarted, Click on attack to attack";
+
+  // sets attacks status block to empty
+  document.getElementById("attack-stats-box").innerHTML = "";
 };

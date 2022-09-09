@@ -5,6 +5,11 @@ body {
   color: #fff;
 }
 
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .display-none {
   display: none;
 }
@@ -16,21 +21,21 @@ body {
 .container {
   margin: 10px 15%;
 }
-.container .health-bar {
+.container .health-bar-container {
   display: flex;
   justify-content: space-between;
 }
-.container .health-bar div div {
+.container .health-bar-container div div {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 0 10px;
+  margin: 20px 0 0 0;
   width: 300px;
 }
-.container .health-bar div .player-health-bar {
+.container .health-bar-container div .health-bar {
   height: 80px;
   width: 300px;
 }
-.container #playerLost {
+.container #game-message {
   height: 20px;
   text-align: center;
 }
@@ -43,9 +48,11 @@ body {
   height: 60px;
   border-radius: 30px;
   text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
 }
 .container .attack-stats {
-  height: 300px;
+  height: 200px;
   margin-top: 50px;
   background-color: #fff;
   color: #000;
