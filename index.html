@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attacking Game in JS</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <section class="health-bar">
+          <div>
+            <p id="player_name">Player<span>500</span>hp</p>
+            <progress
+              id="player_health"
+              class="player-health-bar"
+              value="500"
+              max="500"
+            >
+              32%
+            </progress>
+          </div>
+          <div>
+            <p>Robot</p>
+            <progress
+              id="robot_health"
+              class="player-health-bar"
+              value="500"
+              max="500"
+            >
+              32%
+            </progress>
+          </div>
+        </section>
+        <p id="playerLost"></p>
+        <section class="button-container">
+          <p id="playerLost"></p>
+          <button id="start" onclick="startHandler()" class="display-block">
+            Start
+          </button>
+          <button id="attack" onclick="attackHandler()" class="display-none">
+            Attack
+          </button>
+          <button id="restart" onclick="restartHandler()" class="display-none">
+            Restart
+          </button>
+        </section>
+        <section class="attack-stats"></section>
+      </div>
+    </main>
+    <script src="/assets/js/index.js"></script>
+  </body>
+</html>
